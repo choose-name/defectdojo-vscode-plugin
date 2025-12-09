@@ -1,6 +1,6 @@
 {
-  "name": "defectdojo-triage",
-  "displayName": "DefectDojo Triage",
+  "name": "defectdojo-triager",
+  "displayName": "DefectDojo Triager",
   "description": "VSCode extension for triaging DefectDojo findings",
   "version": "0.0.1",
   "publisher": "choose-name",
@@ -10,7 +10,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/your-username/Defect-Dojo-Sarif.git"
+    "url": "https://github.com/choose-name/defectdojo-vscode-plugin"
   },
   "engines": {
     "vscode": "^1.106.0"
