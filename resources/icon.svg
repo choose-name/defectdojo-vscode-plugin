@@ -1,0 +1,8 @@
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Shield with warning symbol -->
+  <path d="M12 2L4 5V11C4 16.55 7.16 21.74 12 23C16.84 21.74 20 16.55 20 11V5L12 2Z" stroke="currentColor" stroke-width="1.5" fill="currentColor" opacity="0.1"/>
+  <path d="M12 2L4 5V11C4 16.55 7.16 21.74 12 23C16.84 21.74 20 16.55 20 11V5L12 2Z" stroke="currentColor" stroke-width="1.5" fill="none"/>
+  <!-- Warning triangle -->
+  <path d="M12 8V12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+  <circle cx="12" cy="15" r="1" fill="currentColor"/>
+</svg>

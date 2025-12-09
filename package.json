@@ -1,0 +1,257 @@
+{
+  "name": "defectdojo-triage",
+  "displayName": "DefectDojo Triage",
+  "description": "VSCode extension for triaging DefectDojo findings",
+  "version": "0.0.1",
+  "author":{
+    "name": "Vladislav Kozyrev",
+    "email": "cjdjd66@gmail.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/your-username/Defect-Dojo-Sarif.git"
+  },
+  "engines": {
+    "vscode": "^1.106.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onCommand:defectdojo-triage.fetchFindings",
+    "onCommand:defectdojo-triage.configure",
+    "onCommand:defectdojo-triage.openFinding",
+    "onCommand:defectdojo-triage.refresh",
+    "onCommand:defectdojo-triage.searchFindings",
+    "onCommand:defectdojo-triage.editImpact",
+    "onCommand:defectdojo-triage.editMitigation",
+    "onCommand:defectdojo-triage.editStatus",
+    "onCommand:defectdojo-triage.submitTriage",
+    "onView:defectdojoFindings"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "defectdojo",
+          "title": "DefectDojo Triage",
+          "icon": "resources/icon.svg"
+        }
+      ]
+    },
+    "views": {
+      "defectdojo": [
+        {
+          "id": "defectdojoFindings",
+          "name": "Findings",
+          "when": "true"
+        }
+      ]
+    },
+    "viewsWelcome": [
+      {
+        "view": "defectdojoFindings",
+        "contents": "No findings loaded.\n\n[Fetch findings](command:defectdojo-triage.fetchFindings)\n[Configure settings](command:defectdojo-triage.configure)"
+      }
+    ],
+    "commands": [
+      {
+        "command": "defectdojo-triage.fetchFindings",
+        "title": "Fetch Findings",
+        "icon": "$(refresh)"
+      },
+      {
+        "command": "defectdojo-triage.configure",
+        "title": "Configure Settings",
+        "icon": "$(settings-gear)"
+      },
+      {
+        "command": "defectdojo-triage.openFinding",
+        "title": "Open File",
+        "icon": "$(go-to-file)"
+      },
+      {
+        "command": "defectdojo-triage.refresh",
+        "title": "Refresh",
+        "icon": "$(refresh)"
+      },
+      {
+        "command": "defectdojo-triage.searchFindings",
+        "title": "Search Findings",
+        "icon": "$(search)"
+      },
+      {
+        "command": "defectdojo-triage.editImpact",
+        "title": "Edit Impact",
+        "icon": "$(comment-discussion)"
+      },
+      {
+        "command": "defectdojo-triage.editMitigation",
+        "title": "Edit Mitigation",
+        "icon": "$(shield)"
+      },
+      {
+        "command": "defectdojo-triage.editStatus",
+        "title": "Select Status",
+        "icon": "$(checklist)"
+      },
+      {
+        "command": "defectdojo-triage.submitTriage",
+        "title": "Submit Triage Data",
+        "icon": "$(send)"
+      }
+    ],
+    "menus": {
+      "view/title": [
+        {
+          "command": "defectdojo-triage.fetchFindings",
+          "when": "view == defectdojoFindings",
+          "group": "navigation",
+          "icon": "$(cloud-download)"
+        },
+        {
+          "command": "defectdojo-triage.refresh",
+          "when": "view == defectdojoFindings",
+          "group": "navigation",
+          "icon": "$(refresh)"
+        },
+        {
+          "command": "defectdojo-triage.searchFindings",
+          "when": "view == defectdojoFindings",
+          "group": "navigation",
+          "icon": "$(search)"
+        },
+        {
+          "command": "defectdojo-triage.configure",
+          "when": "view == defectdojoFindings",
+          "group": "navigation",
+          "icon": "$(settings-gear)"
+        }
+      ],
+      "view/item/context": [
+        {
+          "command": "defectdojo-triage.openFinding",
+          "when": "view == defectdojoFindings && viewItem == finding",
+          "group": "inline"
+        },
+        {
+          "command": "defectdojo-triage.editImpact",
+          "when": "view == defectdojoFindings && (viewItem == finding || viewItem == triageImpact)",
+          "group": "triage"
+        },
+        {
+          "command": "defectdojo-triage.editMitigation",
+          "when": "view == defectdojoFindings && (viewItem == finding || viewItem == triageMitigation)",
+          "group": "triage"
+        },
+        {
+          "command": "defectdojo-triage.editStatus",
+          "when": "view == defectdojoFindings && (viewItem == finding || viewItem == triageStatusEditable)",
+          "group": "triage"
+        },
+        {
+          "command": "defectdojo-triage.submitTriage",
+          "when": "view == defectdojoFindings && viewItem == finding",
+          "group": "triage@1"
+        }
+      ]
+    },
+    "configuration": {
+      "title": "DefectDojo Triage",
+      "properties": {
+        "defectdojo-triage.apiToken": {
+          "type": "string",
+          "default": "",
+          "description": "API token for accessing DefectDojo",
+          "scope": "application"
+        },
+        "defectdojo-triage.url": {
+          "type": "string",
+          "default": "",
+          "description": "DefectDojo server URL",
+          "scope": "application"
+        },
+        "defectdojo-triage.productName": {
+          "type": "string",
+          "default": "",
+          "description": "Project/product name",
+          "scope": "application"
+        },
+        "defectdojo-triage.testType": {
+          "type": "string",
+          "default": "",
+          "description": "Scan type",
+          "scope": "application"
+        },
+        "defectdojo-triage.active": {
+          "type": "string",
+          "default": "",
+          "description": "Filter for active findings (true/false). Leave empty for default (true)",
+          "scope": "application"
+        },
+        "defectdojo-triage.duplicate": {
+          "type": "string",
+          "default": "",
+          "description": "Filter for duplicate findings (true/false). Leave empty for default (false)",
+          "scope": "application"
+        },
+        "defectdojo-triage.verified": {
+          "type": "string",
+          "default": "",
+          "description": "Filter for verified findings (true/false). Leave empty for default (false)",
+          "scope": "application"
+        },
+        "defectdojo-triage.limit": {
+          "type": "string",
+          "default": "",
+          "description": "Maximum number of findings to fetch. Leave empty for default (99999)",
+          "scope": "application"
+        },
+        "defectdojo-triage.autoSearchDependencies": {
+          "type": "string",
+          "default": "true",
+          "description": "Enable automatic dependency search for Dependency Track findings (true/false)",
+          "scope": "application"
+        },
+        "defectdojo-triage.aggregateDependencyTrack": {
+          "type": "string",
+          "default": "true",
+          "description": "Enable Dependency Track finding aggregation by Location. Findings with the same Location are merged (true/false)",
+          "scope": "application"
+        },
+        "defectdojo-triage.dependencySearchDepth": {
+          "type": "number",
+          "default": 15,
+          "description": "Dependency search depth in the project (directory nesting levels)",
+          "scope": "application"
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "package": "npm run compile && vsce package --allow-missing-repository"
+  },
+  "devDependencies": {
+    "@types/node": "^24.10.1",
+    "@types/vscode": "^1.106.1",
+    "@vscode/vsce": "^3.7.1",
+    "typescript": "^5.9.3"
+  },
+  "dependencies": {
+    "axios": "^1.13.2"
+  },
+  "bundleDependencies": [
+    "axios",
+    "follow-redirects",
+    "proxy-from-env",
+    "form-data",
+    "combined-stream",
+    "delayed-stream",
+    "mime-types",
+    "mime-db"
+  ]
+}
