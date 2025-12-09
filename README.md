@@ -15,42 +15,7 @@ A VSCode extension that retrieves and displays DefectDojo findings for triage.
 
 - **Jira push**: Automatic Jira push for findings with status "Verified" is not implemented because DefectDojo API v2 does not expose an endpoint for it. The `/finding/{id}/jira/push` endpoint is only available through the web UI and requires CSRF token plus cookie authentication, which is not supported when using an API token.
 
-## Installation
-
-1. Install dependencies:
-```bash
-npm install
-```
-
-2. Compile the project:
-```bash
-npm run compile
-```
-
-3. For development, use watch mode:
-```bash
-npm run watch
-```
-
-4. Press F5 in VSCode to launch the extension in a new Extension Development Host window.
-
 ## Usage
-
-### Configure settings
-
-1. Open the Command Palette (Ctrl+Shift+P / Cmd+Shift+P)
-2. Run `DefectDojo: Configure Settings`
-3. Provide:
-   - **API token**: Token for DefectDojo API access
-   - **DefectDojo URL**: Server URL (e.g., `https://defect-dojo.test.com`)
-   - **Project name**: Product/project name in DefectDojo
-   - **Scan type**: Scan type name
-
-### Fetch findings
-
-1. Open the Command Palette (Ctrl+Shift+P / Cmd+Shift+P)
-2. Run `DefectDojo: Fetch Findings`
-3. Results appear in the "DefectDojo Triage" Output panel
 
 ## Request parameters
 
@@ -58,8 +23,6 @@ The extension uses these API parameters:
 - `active`: true (only active findings)
 - `duplicate`: false (exclude duplicates)
 - `verified`: false (only unverified)
-- `test__engagement__product`: product ID (resolved automatically by name)
-- `test__test_type`: test type ID (resolved automatically by name)
 - `limit`: 99999
 
 ## Project structure

@@ -2,7 +2,7 @@
   "name": "defectdojo-triager",
   "displayName": "DefectDojo Triager",
   "description": "VSCode extension for triaging DefectDojo findings",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "publisher": "choose-name",
   "author":{
     "name": "Vladislav Kozyrev",
