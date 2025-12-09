@@ -3,6 +3,7 @@
   "displayName": "DefectDojo Triage",
   "description": "VSCode extension for triaging DefectDojo findings",
   "version": "0.0.1",
+  "publisher": "choose-name",
   "author":{
     "name": "Vladislav Kozyrev",
     "email": "cjdjd66@gmail.com"
